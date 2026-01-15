@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NeuroNimble ⚡ Kathleen's Toolkit</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Kathleen's NeuroNimble Coaching toolkit - sparkly support for when your brain needs a boost">
+    <meta name="theme-color" content="#00CED1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="NeuroNimble">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            /* NeuroNimble Brand Colours */
+            --nn-cyan: #00CED1;
+            --nn-cyan-light: #40E0D0;
+            --nn-cyan-glow: rgba(0, 206, 209, 0.6);
+            --nn-pink: #FF00FF;
+            --nn-pink-light: #FF69B4;
+            --nn-pink-glow: rgba(255, 0, 255, 0.5);
+            --nn-gold: #FFD700;
+            --nn-orange: #FFA500;
+            --nn-gold-glow: rgba(255, 215, 0, 0.6);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 30%, #2d1b4e 60%, #1a0a2a 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Lightning Bolt Animation */
+        .lightning-bolt {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 3em;
+            animation: boltPulse 2s ease-in-out infinite;
+            z-index: 100;
+            filter: drop-shadow(0 0 25px var(--nn-gold-glow)) drop-shadow(0 0 50px var(--nn-cyan-glow));
+            cursor: pointer;
+        }
+        @keyframes boltPulse {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+
+        /* Neural Sparkle Particles */
+        .glitter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .glitter {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #fff 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glitterFall linear infinite;
+        }
+        @keyframes glitterFall {
+            0% { transform: translateY(-10px) rotate(0deg) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg) scale(0.5); opacity: 0; }
+        }
+
+        /* Neural Network Pulse Rays */
+        .neural-rays {
+            position: fixed;
+            top: -50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(0, 206, 209, 0.08) 10deg,
+                transparent 20deg,
+                rgba(255, 0, 255, 0.08) 30deg,
+                transparent 40deg,
+                rgba(255, 215, 0, 0.08) 50deg,
+                transparent 60deg
+            );
+            animation: raysSpin 25s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes raysSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0 30px;
+        }
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--nn-cyan), var(--nn-pink), var(--nn-gold), var(--nn-cyan));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .header .greeting {
+            font-size: 1.3em;
+            color: var(--nn-pink);
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px var(--nn-pink-glow);
+        }
+        .header .subtitle {
+            color: var(--nn-cyan-light);
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+        .header .brand {
+            font-size: 0.9em;
+            color: var(--nn-pink);
+            margin-top: 8px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Main Card */
+        .main-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(26, 10, 42, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.5),
+                0 0 60px var(--nn-cyan-glow),
+                inset 0 1px 0 rgba(0, 206, 209, 0.2);
+            border: 2px solid rgba(0, 206, 209, 0.3);
+        }
+
+        /* State Question */
+        .state-question {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .state-question h2 {
+            font-size: 1.6em;
+            color: var(--nn-cyan);
+            margin-bottom: 10px;
+            text-shadow: 0 0 25px var(--nn-cyan-glow);
+        }
+        .state-question p {
+            color: var(--nn-pink-light);
+            font-size: 1em;
+        }
+
+        /* State Grid */
+        .state-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .state-option {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 22px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .state-option:hover {
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .state-option.selected {
+            border-color: var(--nn-gold);
+            transform: scale(1.03);
+            box-shadow: 0 0 30px var(--nn-gold-glow);
+        }
+
+        /* STATE CARDS - EASY TO READ WHITE TEXT */
+        .state-option.ignited {
+            background: linear-gradient(135deg, #00897B 0%, #00695C 100%);
+        }
+        .state-option.dysreg-upper {
+            background: linear-gradient(135deg, #F9A825 0%, #F57F17 100%);
+        }
+        .state-option.hyper {
+            background: linear-gradient(135deg, #D81B60 0%, #AD1457 100%);
+        }
+        .state-option.dysreg-lower {
+            background: linear-gradient(135deg, #7B1FA2 0%, #6A1B9A 100%);
+        }
+        .state-option.hypo {
+            background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+        }
+
+        .state-icon {
+            font-size: 2.8em;
+            width: 65px;
+            text-align: center;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        .state-info h3 {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .state-info p {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Continue Button */
+        .continue-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            margin-top: 28px;
+            background: linear-gradient(135deg, var(--nn-cyan) 0%, var(--nn-pink) 50%, var(--nn-cyan) 100%);
+            background-size: 200% 200%;
+            color: #0a0a1a;
+            border: 2px solid var(--nn-cyan);
+            border-radius: 16px;
+            font-size: 1.15em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: buttonShimmer 3s ease-in-out infinite;
+            box-shadow: 0 0 20px var(--nn-cyan-glow);
+        }
+        @keyframes buttonShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px var(--nn-cyan-glow), 0 15px 40px var(--nn-pink-glow);
+        }
+        .continue-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            animation: none;
+            box-shadow: none;
+        }
+
+        /* Sections */
+        .neuro-section {
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 2px solid var(--nn-cyan);
+            box-shadow: 0 -1px 20px var(--nn-cyan-glow);
+        }
+        .neuro-section h3 {
+            color: var(--nn-pink);
+            margin-bottom: 12px;
+            font-size: 1.3em;
+            text-align: center;
+            text-shadow: 0 0 20px var(--nn-pink-glow);
+        }
+        .neuro-section > p {
+            text-align: center;
+            color: var(--nn-cyan-light);
+            margin-bottom: 22px;
+            font-size: 0.95em;
+        }
+
+        /* Intervention Items */
+        .intervention-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .intervention-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(0, 206, 209, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .intervention-item:hover {
+            border-color: var(--nn-cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--nn-cyan-glow);
+        }
+        .intervention-item.expanded {
+            border-color: var(--nn-pink);
+            background: rgba(255, 0, 255, 0.1);
+        }
+        .intervention-header h4 {
+            color: #fff;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .intervention-content {
+            display: none;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .intervention-item.expanded .intervention-content {
+            display: block;
+        }
+        .intervention-steps {
+            list-style: none;
+            counter-reset: step;
+        }
+        .intervention-steps li {
+            counter-increment: step;
+            padding: 12px 0 12px 50px;
+            position: relative;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .intervention-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--nn-gold) 0%, var(--nn-orange) 100%);
+            color: #0a0a1a;
+            font-weight: 700;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--nn-gold-glow);
+        }
+        .intervention-tip {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 165, 0, 0.15) 100%);
+            border-left: 4px solid var(--nn-gold);
+            padding: 15px 18px;
+            margin-top: 18px;
+            border-radius: 0 12px 12px 0;
+            font-size: 0.95em;
+            color: var(--nn-gold);
+        }
+
+        /* Neurotransmitter Cards */
+        .neuro-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        @media (max-width: 600px) {
+            .neuro-grid { grid-template-columns: 1fr; }
+        }
+        .neuro-card {
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.4s;
+            border: 3px solid transparent;
+        }
+        .neuro-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .neuro-card.selected {
+            border-color: var(--nn-gold);
+        }
+        .neuro-card.dopamine { background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%); color: #fff; }
+        .neuro-card.oxytocin { background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); color: #fff; }
+        .neuro-card.serotonin { background: linear-gradient(135deg, #2196F3 0%, #1565C0 100%); color: #fff; }
+        .neuro-card.endorphins { background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); color: #fff; }
+        .neuro-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .neuro-card-header .icon { font-size: 2em; }
+        .neuro-card-header h4 { font-size: 1.1em; font-weight: 700; }
+        .neuro-card p { font-size: 0.9em; opacity: 0.95; }
+        .neuro-detail {
+            display: none;
+            margin-top: 22px;
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .neuro-detail.active { display: block; }
+        .neuro-detail h4 { color: var(--nn-gold); margin-bottom: 15px; }
+        .neuro-detail p, .neuro-detail li { color: rgba(255, 255, 255, 0.9); line-height: 1.6; }
+        .neuro-detail ul { padding-left: 20px; margin-top: 10px; }
+
+        /* Decision Matrix Section */
+        .brain-dump-section {
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 2px solid var(--nn-pink);
+        }
+        .brain-dump-section h3 {
+            color: var(--nn-cyan);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            text-align: center;
+            text-shadow: 0 0 15px var(--nn-cyan-glow);
+        }
+        .matrix-input {
+            margin-bottom: 20px;
+        }
+        .matrix-text-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(0, 206, 209, 0.4);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1em;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+        }
+        .matrix-text-input::placeholder { color: rgba(0, 206, 209, 0.6); }
+        .matrix-text-input:focus {
+            outline: none;
+            border-color: var(--nn-cyan);
+            box-shadow: 0 0 20px var(--nn-cyan-glow);
+        }
+        .decision-matrix {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .matrix-labels-top {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr;
+            gap: 8px;
+            text-align: center;
+        }
+        .matrix-label {
+            font-size: 0.8em;
+            color: var(--nn-pink);
+            font-weight: 600;
+        }
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr;
+            gap: 8px;
+        }
+        .matrix-label-side {
+            font-size: 0.7em;
+            color: var(--nn-gold);
+            font-weight: 600;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .matrix-quadrant {
+            min-height: 120px;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .matrix-quadrant:hover {
+            transform: scale(1.02);
+        }
+        .matrix-quadrant.do-now {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.3) 0%, rgba(255, 0, 255, 0.15) 100%);
+            border-color: rgba(255, 0, 255, 0.4);
+        }
+        .matrix-quadrant.do-now:hover { box-shadow: 0 0 20px var(--nn-pink-glow); }
+        .matrix-quadrant.schedule {
+            background: linear-gradient(135deg, rgba(0, 206, 209, 0.3) 0%, rgba(0, 206, 209, 0.15) 100%);
+            border-color: rgba(0, 206, 209, 0.4);
+        }
+        .matrix-quadrant.schedule:hover { box-shadow: 0 0 20px var(--nn-cyan-glow); }
+        .matrix-quadrant.delegate {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.15) 100%);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+        .matrix-quadrant.delegate:hover { box-shadow: 0 0 20px var(--nn-gold-glow); }
+        .matrix-quadrant.drop {
+            background: linear-gradient(135deg, rgba(128, 128, 128, 0.3) 0%, rgba(128, 128, 128, 0.15) 100%);
+            border-color: rgba(128, 128, 128, 0.4);
+        }
+        .matrix-quadrant.drop:hover { box-shadow: 0 0 20px rgba(128, 128, 128, 0.5); }
+        .quadrant-header {
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .quadrant-items {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .matrix-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: 0.85em;
+            color: #fff;
+        }
+        .matrix-item-delete {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            font-size: 1em;
+            padding: 0;
+            margin-left: auto;
+        }
+        .matrix-item-delete:hover { color: #ff4757; }
+        .matrix-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .save-status { font-size: 0.9em; color: #4CAF50; }
+        @media (max-width: 600px) {
+            .matrix-labels-top, .matrix-row { grid-template-columns: 50px 1fr 1fr; }
+            .matrix-label-side { font-size: 0.6em; }
+            .matrix-quadrant { min-height: 100px; padding: 10px; }
+            .quadrant-header { font-size: 0.75em; }
+        }
+        .clear-dump-btn {
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 0, 255, 0.4);
+            border-radius: 10px;
+            font-size: 0.9em;
+            color: var(--nn-pink-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .clear-dump-btn:hover { background: rgba(255, 0, 255, 0.2); border-color: var(--nn-pink); }
+
+        /* Quick Add Buttons for Mobile */
+        .quick-add-btn {
+            padding: 12px 16px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            font-family: inherit;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        .quick-add-btn:active {
+            transform: scale(0.95);
+        }
+        .do-now-btn {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.4) 0%, rgba(255, 0, 255, 0.2) 100%);
+            border-color: rgba(255, 0, 255, 0.5);
+            color: #fff;
+        }
+        .do-now-btn:hover, .do-now-btn:active { background: rgba(255, 0, 255, 0.5); box-shadow: 0 0 15px var(--nn-pink-glow); }
+        .schedule-btn {
+            background: linear-gradient(135deg, rgba(0, 206, 209, 0.4) 0%, rgba(0, 206, 209, 0.2) 100%);
+            border-color: rgba(0, 206, 209, 0.5);
+            color: #fff;
+        }
+        .schedule-btn:hover, .schedule-btn:active { background: rgba(0, 206, 209, 0.5); box-shadow: 0 0 15px var(--nn-cyan-glow); }
+        .delegate-btn {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.4) 0%, rgba(255, 215, 0, 0.2) 100%);
+            border-color: rgba(255, 215, 0, 0.5);
+            color: #fff;
+        }
+        .delegate-btn:hover, .delegate-btn:active { background: rgba(255, 215, 0, 0.5); box-shadow: 0 0 15px var(--nn-gold-glow); }
+        .drop-btn {
+            background: linear-gradient(135deg, rgba(128, 128, 128, 0.4) 0%, rgba(128, 128, 128, 0.2) 100%);
+            border-color: rgba(128, 128, 128, 0.5);
+            color: #fff;
+        }
+        .drop-btn:hover, .drop-btn:active { background: rgba(128, 128, 128, 0.5); box-shadow: 0 0 15px rgba(128, 128, 128, 0.5); }
+
+        /* Journal Section */
+        .journal-section {
+            margin-top: 30px;
+            padding-top: 28px;
+            border-top: 2px solid var(--nn-cyan);
+        }
+        .journal-section h3 {
+            color: var(--nn-pink);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            text-align: center;
+        }
+        .prompt-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+        .prompt-chip {
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 0, 255, 0.4);
+            border-radius: 25px;
+            font-size: 0.9em;
+            color: var(--nn-pink);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .prompt-chip:hover {
+            background: rgba(255, 0, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        .journal-textarea {
+            width: 100%;
+            min-height: 160px;
+            padding: 18px;
+            border: 2px solid rgba(255, 0, 255, 0.4);
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            line-height: 1.7;
+        }
+        .journal-textarea:focus {
+            outline: none;
+            border-color: var(--nn-pink);
+            box-shadow: 0 0 20px var(--nn-pink-glow);
+        }
+        .journal-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+        }
+        .journal-status { font-size: 0.9em; color: #4CAF50; }
+        .save-entry-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--nn-gold) 0%, var(--nn-orange) 100%);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9em;
+            color: #0a0a1a;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .save-entry-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--nn-gold-glow); }
+
+        /* Past Entries */
+        .past-entries { margin-top: 22px; }
+        .entries-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95em;
+            color: var(--nn-gold);
+        }
+        .entries-toggle:hover { background: rgba(255, 215, 0, 0.15); }
+        .entries-list { display: none; margin-top: 15px; }
+        .entries-list.open { display: block; }
+        .entry-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--nn-pink);
+        }
+        .entry-date { font-size: 0.85em; color: rgba(255, 255, 255, 0.6); margin-bottom: 8px; }
+        .entry-text { font-size: 0.95em; color: rgba(255, 255, 255, 0.9); line-height: 1.6; white-space: pre-wrap; }
+        .entry-delete { float: right; background: none; border: none; color: rgba(255, 255, 255, 0.4); cursor: pointer; font-size: 1.2em; }
+        .entry-delete:hover { color: #ff4757; }
+
+        /* Help Section */
+        .help-section {
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 2px solid var(--nn-gold);
+        }
+        .help-section h3 {
+            color: var(--nn-gold);
+            margin-bottom: 12px;
+            font-size: 1.3em;
+            text-align: center;
+            text-shadow: 0 0 15px var(--nn-gold-glow);
+        }
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) { .help-grid { grid-template-columns: 1fr; } }
+        .help-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(0, 206, 209, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .help-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--nn-cyan);
+            box-shadow: 0 10px 30px var(--nn-cyan-glow);
+        }
+        .help-card .icon { font-size: 2.5em; margin-bottom: 12px; }
+        .help-card h4 { color: #fff; margin-bottom: 8px; }
+        .help-card p { color: rgba(255, 255, 255, 0.7); font-size: 0.9em; }
+
+        /* History Section */
+        .history-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(255, 255, 255, 0.15);
+        }
+        .history-section h3 { color: #c0c0c0; margin-bottom: 18px; font-size: 1.15em; }
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        .history-item .state-badge {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #fff;
+        }
+        .history-item .state-badge.ignited { background: #00897B; }
+        .history-item .state-badge.hyper { background: #D81B60; }
+        .history-item .state-badge.hypo { background: #1565C0; }
+        .history-item .state-badge.dysreg-upper { background: #F9A825; }
+        .history-item .state-badge.dysreg-lower { background: #7B1FA2; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9em;
+        }
+
+        /* State Detail View */
+        .state-detail { display: none; }
+        .state-detail.active { display: block; }
+        .state-header {
+            text-align: center;
+            padding: 28px;
+            border-radius: 20px;
+            margin-bottom: 28px;
+            color: #fff;
+        }
+        .state-header.ignited { background: linear-gradient(135deg, #00897B 0%, #00695C 100%); }
+        .state-header.hyper { background: linear-gradient(135deg, #D81B60 0%, #AD1457 100%); }
+        .state-header.hypo { background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%); }
+        .state-header.dysreg-upper { background: linear-gradient(135deg, #F9A825 0%, #F57F17 100%); }
+        .state-header.dysreg-lower { background: linear-gradient(135deg, #7B1FA2 0%, #6A1B9A 100%); }
+        .state-header .icon { font-size: 3.5em; margin-bottom: 12px; }
+        .state-header h2 { font-size: 1.6em; margin-bottom: 6px; }
+        .state-header .zone { font-size: 0.95em; opacity: 0.9; }
+
+        /* Explanation Cards */
+        .explanation-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 18px;
+        }
+        .explanation-card h4 { color: var(--nn-gold); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .explanation-card p { color: rgba(255, 255, 255, 0.9); line-height: 1.7; }
+        .explanation-card.neurology {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.3) 0%, rgba(255, 105, 180, 0.2) 100%);
+            border-left: 4px solid #9b59b6;
+        }
+        .explanation-card.validation {
+            background: linear-gradient(135deg, rgba(0, 206, 209, 0.2) 0%, rgba(0, 250, 154, 0.2) 100%);
+            border-left: 4px solid var(--nn-cyan);
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95em;
+            color: #fff;
+            margin-bottom: 22px;
+            transition: all 0.3s;
+        }
+        .back-btn:hover { background: rgba(255, 0, 255, 0.2); border-color: var(--nn-pink); }
+
+        /* Category Tabs */
+        .intervention-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .category-tab {
+            padding: 12px 22px;
+            border-radius: 30px;
+            border: 2px solid rgba(0, 206, 209, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: var(--nn-cyan);
+        }
+        .category-tab:hover { border-color: var(--nn-pink); }
+        .category-tab.active {
+            background: linear-gradient(135deg, var(--nn-cyan) 0%, var(--nn-pink) 100%);
+            color: #0a0a1a;
+            border-color: transparent;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            .main-card { padding: 22px; border-radius: 24px; }
+            .state-option { padding: 18px; }
+            .state-icon { font-size: 2.2em; width: 55px; }
+            .header h1 { font-size: 2em; }
+            .lightning-bolt { font-size: 2.2em; top: 10px; right: 10px; }
+            .intervention-categories { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 10px; }
+            .category-tab { white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Lightning Bolt -->
+    <div class="lightning-bolt" onclick="createGlitterBurst(event)">⚡</div>
+
+    <!-- Neural Network Rays -->
+    <div class="neural-rays"></div>
+
+    <!-- Glitter Container -->
+    <div class="glitter-container" id="glitterContainer"></div>
+
+    <div class="container">
+        <div class="header">
+            <p class="greeting" id="greeting">Hey Kathleen! ⚡</p>
+            <h1>⚡ NEURONIMBLE ⚡</h1>
+            <div class="subtitle">sparkly support when your brain needs a boost</div>
+            <div class="brand">Coaching Toolkit</div>
+        </div>
+
+        <div class="main-card">
+            <!-- Step 1: State Selection -->
+            <div id="stateSelector" class="fade-in">
+                <div class="state-question">
+                    <h2>Where are you right now, gorgeous?</h2>
+                    <p>No judgement. Just notice. This is your starting point. ✨</p>
+                </div>
+
+                <div class="state-grid">
+                    <div class="state-option ignited" onclick="selectState('ignited')">
+                        <div class="state-icon">💃</div>
+                        <div class="state-info">
+                            <h3>Feeling Fabulous</h3>
+                            <p>I'm in a great headspace, ready to sparkle!</p>
+                        </div>
+                    </div>
+
+                    <div class="state-option dysreg-upper" onclick="selectState('dysreg-upper')">
+                        <div class="state-icon">😤</div>
+                        <div class="state-info">
+                            <h3>Getting Wound Up</h3>
+                            <p>Something's bothering me, stress is building</p>
+                        </div>
+                    </div>
+
+                    <div class="state-option hyper" onclick="selectState('hyper')">
+                        <div class="state-icon">🌀</div>
+                        <div class="state-info">
+                            <h3>Totally Overwhelmed</h3>
+                            <p>Too much right now, can't think straight</p>
+                        </div>
+                    </div>
+
+                    <div class="state-option dysreg-lower" onclick="selectState('dysreg-lower')">
+                        <div class="state-icon">😔</div>
+                        <div class="state-info">
+                            <h3>Running on Empty</h3>
+                            <p>Energy's draining, starting to shut down</p>
+                        </div>
+                    </div>
+
+                    <div class="state-option hypo" onclick="selectState('hypo')">
+                        <div class="state-icon">🧊</div>
+                        <div class="state-info">
+                            <h3>Completely Flat</h3>
+                            <p>Numb, can't feel anything, checked out</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="continue-btn" id="continueBtn" onclick="showStateDetail()" disabled>
+                    Let's Sparkle Through This →
+                </button>
+
+                <!-- Executive Function Quick Wins -->
+                <div class="neuro-section">
+                    <h3>🧠 Quick Wins for Busy Brains</h3>
+                    <p>When your brain needs extra support - no judgement, just gentle tools</p>
+
+                    <div class="intervention-list">
+                        <div class="intervention-item" onclick="this.classList.toggle('expanded')">
+                            <div class="intervention-header">
+                                <h4>🎯 One Thing Only</h4>
+                            </div>
+                            <div class="intervention-content">
+                                <ol class="intervention-steps">
+                                    <li>Look at everything swirling in your head</li>
+                                    <li>Pick just ONE thing - doesn't matter which</li>
+                                    <li>Do only the very first step of that one thing</li>
+                                    <li>Celebrate! That's enough. You did it, queen! 👑</li>
+                                </ol>
+                                <div class="intervention-tip">
+                                    💡 Your brain wants to hold everything at once. It can't. Choosing ONE is not giving up on the others - it's working WITH your fabulous brain.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="intervention-item" onclick="this.classList.toggle('expanded')">
+                            <div class="intervention-header">
+                                <h4>⏰ Body Doubles</h4>
+                            </div>
+                            <div class="intervention-content">
+                                <ol class="intervention-steps">
+                                    <li>Find a "body double" - someone to be present while you work</li>
+                                    <li>Options: Video call a friend, put on a "study with me" video, work in a café</li>
+                                    <li>You don't need them to help - just to BE there</li>
+                                    <li>The presence of others helps your brain stay on track</li>
+                                </ol>
+                                <div class="intervention-tip">
+                                    💡 This isn't weakness - it's using your social brain to support your executive function. Very clever, actually!
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="intervention-item" onclick="this.classList.toggle('expanded')">
+                            <div class="intervention-header">
+                                <h4>💫 Energy-First Planning</h4>
+                            </div>
+                            <div class="intervention-content">
+                                <ol class="intervention-steps">
+                                    <li>Check in: What's your energy RIGHT NOW? (High/Medium/Low)</li>
+                                    <li>Match your task to your energy - not the other way around</li>
+                                    <li>Low energy = simple, familiar tasks only</li>
+                                    <li>Save complex stuff for your best energy windows</li>
+                                </ol>
+                                <div class="intervention-tip">
+                                    💡 Fighting your energy level rarely works. Working WITH it does.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neurotransmitter Section -->
+                <div class="neuro-section">
+                    <h3>🧪 Your Brain's Feel-Good Squad</h3>
+                    <p>Tap one to see what happens when it's low and how to naturally boost it</p>
+
+                    <div class="neuro-grid">
+                        <div class="neuro-card dopamine" onclick="selectNeuro('dopamine')">
+                            <div class="neuro-card-header">
+                                <span class="icon">💗</span>
+                                <h4>DOPAMINE</h4>
+                            </div>
+                            <p>The reward chemical - motivation & pleasure</p>
+                        </div>
+
+                        <div class="neuro-card oxytocin" onclick="selectNeuro('oxytocin')">
+                            <div class="neuro-card-header">
+                                <span class="icon">🧡</span>
+                                <h4>OXYTOCIN</h4>
+                            </div>
+                            <p>The love hormone - connection & bonding</p>
+                        </div>
+
+                        <div class="neuro-card serotonin" onclick="selectNeuro('serotonin')">
+                            <div class="neuro-card-header">
+                                <span class="icon">💙</span>
+                                <h4>SEROTONIN</h4>
+                            </div>
+                            <p>The mood stabiliser - confidence & calm</p>
+                        </div>
+
+                        <div class="neuro-card endorphins" onclick="selectNeuro('endorphins')">
+                            <div class="neuro-card-header">
+                                <span class="icon">💚</span>
+                                <h4>ENDORPHINS</h4>
+                            </div>
+                            <p>The pain reliever - natural highs & relief</p>
+                        </div>
+                    </div>
+
+                    <div id="neuroDetail" class="neuro-detail"></div>
+                </div>
+
+                <!-- Mini Decision Matrix -->
+                <div class="brain-dump-section">
+                    <h3>🎯 Quick Decision Matrix</h3>
+                    <p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 18px;">Dump your thoughts, then sort them. Tap a quadrant to add!</p>
+
+                    <div class="matrix-input">
+                        <input type="text" id="matrixInput" class="matrix-text-input" placeholder="What's on your mind? Type and tap where it goes...">
+                    </div>
+
+                    <!-- Quick Add Buttons (Better for Mobile) -->
+                    <div class="quick-add-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; justify-content: center;">
+                        <button class="quick-add-btn do-now-btn" onclick="addToQuadrant('doNow', event)">🔥 Do Now</button>
+                        <button class="quick-add-btn schedule-btn" onclick="addToQuadrant('schedule', event)">📅 Schedule</button>
+                        <button class="quick-add-btn delegate-btn" onclick="addToQuadrant('delegate', event)">👋 Delegate</button>
+                        <button class="quick-add-btn drop-btn" onclick="addToQuadrant('drop', event)">🗑️ Drop</button>
+                    </div>
+
+                    <div class="decision-matrix">
+                        <div class="matrix-labels-top">
+                            <span></span>
+                            <span class="matrix-label">⚡ URGENT</span>
+                            <span class="matrix-label">🐢 NOT URGENT</span>
+                        </div>
+                        <div class="matrix-row">
+                            <span class="matrix-label-side">⭐ IMPORTANT</span>
+                            <div class="matrix-quadrant do-now" onclick="addToQuadrant('doNow', event)">
+                                <div class="quadrant-header">🔥 Do Now</div>
+                                <div class="quadrant-items" id="doNow"></div>
+                            </div>
+                            <div class="matrix-quadrant schedule" onclick="addToQuadrant('schedule', event)">
+                                <div class="quadrant-header">📅 Schedule</div>
+                                <div class="quadrant-items" id="schedule"></div>
+                            </div>
+                        </div>
+                        <div class="matrix-row">
+                            <span class="matrix-label-side">🤷 NOT IMPORTANT</span>
+                            <div class="matrix-quadrant delegate" onclick="addToQuadrant('delegate', event)">
+                                <div class="quadrant-header">👋 Delegate</div>
+                                <div class="quadrant-items" id="delegate"></div>
+                            </div>
+                            <div class="matrix-quadrant drop" onclick="addToQuadrant('drop', event)">
+                                <div class="quadrant-header">🗑️ Drop It</div>
+                                <div class="quadrant-items" id="drop"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="matrix-actions">
+                        <span class="save-status" id="matrixStatus">✓ Auto-saved</span>
+                        <button class="clear-dump-btn" onclick="clearMatrix()">🗑️ Clear All</button>
+                    </div>
+                </div>
+
+                <!-- Journal -->
+                <div class="journal-section">
+                    <h3>📓 Kathleen's Sparkle Journal</h3>
+                    <p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 18px;">A place for deeper thoughts. Saved entries stay private on your device.</p>
+
+                    <div class="prompt-chips">
+                        <span class="prompt-chip" onclick="insertPrompt('Right now I feel...')">Right now I feel...</span>
+                        <span class="prompt-chip" onclick="insertPrompt('Today I noticed...')">Today I noticed...</span>
+                        <span class="prompt-chip" onclick="insertPrompt('What I need is...')">What I need...</span>
+                        <span class="prompt-chip" onclick="insertPrompt('I\'m grateful for...')">I'm grateful for...</span>
+                    </div>
+
+                    <textarea id="journalEntry" class="journal-textarea" placeholder="Write whatever's on your mind, Kathleen... ✨"></textarea>
+
+                    <div class="journal-actions">
+                        <span class="journal-status" id="journalStatus">✓ Auto-saved</span>
+                        <button class="save-entry-btn" onclick="saveJournalEntry()">💾 Save Entry</button>
+                    </div>
+
+                    <div class="past-entries" id="pastEntries" style="display: none;">
+                        <button class="entries-toggle" onclick="togglePastEntries()">
+                            <span>📖 View past entries</span>
+                            <span class="toggle-icon" id="entriesIcon">▼</span>
+                        </button>
+                        <div class="entries-list" id="entriesList"></div>
+                    </div>
+                </div>
+
+                <!-- Help & Support Section -->
+                <div class="help-section">
+                    <h3>💜 Help & Support</h3>
+                    <p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 10px;">You're never alone, gorgeous. Here's your support squad.</p>
+
+                    <div class="help-grid">
+                        <div class="help-card" onclick="window.open('https://www.samaritans.org/', '_blank')">
+                            <div class="icon">📞</div>
+                            <h4>Samaritans</h4>
+                            <p>Free 24/7 support: 116 123</p>
+                        </div>
+                        <div class="help-card" onclick="window.open('https://www.mind.org.uk/', '_blank')">
+                            <div class="icon">🧠</div>
+                            <h4>Mind</h4>
+                            <p>Mental health support & info</p>
+                        </div>
+                        <div class="help-card" onclick="window.open('https://www.anxietyuk.org.uk/', '_blank')">
+                            <div class="icon">💙</div>
+                            <h4>Anxiety UK</h4>
+                            <p>Support for anxiety & stress</p>
+                        </div>
+                        <div class="help-card" onclick="window.open('https://harnessthespark.ai/', '_blank')">
+                            <div class="icon">✨</div>
+                            <h4>Harness the Spark</h4>
+                            <p>More tools & resources</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History -->
+                <div class="history-section" id="historySection" style="display: none;">
+                    <h3>📊 Recent Check-Ins</h3>
+                    <div id="historyList"></div>
+                </div>
+            </div>
+
+            <!-- Step 2: State Detail & Interventions -->
+            <div id="stateDetail" class="state-detail"></div>
+        </div>
+
+        <div class="footer">
+            <p style="color: var(--nn-pink); text-shadow: 0 0 10px var(--nn-pink-glow);">⚡ NEURONIMBLE COACHING ⚡</p>
+            <p style="margin-top: 8px;">Made with 💜 for Kathleen | Your data stays on your device</p>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // GLITTER EFFECTS
+        // ============================================
+
+        function createGlitter() {
+            const container = document.getElementById('glitterContainer');
+            const colors = ['#00CED1', '#FF00FF', '#FFD700', '#40E0D0', '#FF69B4', '#FFA500'];
+
+            for (let i = 0; i < 40; i++) {
+                const glitter = document.createElement('div');
+                glitter.className = 'glitter';
+                glitter.style.left = Math.random() * 100 + '%';
+                glitter.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                glitter.style.animationDelay = Math.random() * 6 + 's';
+                glitter.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]} 0%, transparent 70%)`;
+                glitter.style.width = (Math.random() * 6 + 3) + 'px';
+                glitter.style.height = glitter.style.width;
+                container.appendChild(glitter);
+            }
+        }
+
+        function createGlitterBurst(event) {
+            const colors = ['#00CED1', '#FF00FF', '#FFD700', '#40E0D0', '#FFA500'];
+            for (let i = 0; i < 30; i++) {
+                const spark = document.createElement('div');
+                spark.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1000;
+                    left: ${event.clientX}px;
+                    top: ${event.clientY}px;
+                `;
+                document.body.appendChild(spark);
+
+                const angle = (Math.random() * 360) * (Math.PI / 180);
+                const velocity = Math.random() * 150 + 50;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+
+                let x = 0, y = 0, opacity = 1;
+                const animate = () => {
+                    x += vx * 0.02;
+                    y += vy * 0.02 + 2;
+                    opacity -= 0.02;
+                    spark.style.transform = `translate(${x}px, ${y}px)`;
+                    spark.style.opacity = opacity;
+                    if (opacity > 0) requestAnimationFrame(animate);
+                    else spark.remove();
+                };
+                requestAnimationFrame(animate);
+            }
+        }
+
+        createGlitter();
+
+        // ============================================
+        // DATA: States and Interventions
+        // ============================================
+
+        const STATES = {
+            'ignited': {
+                icon: '💃',
+                name: 'Feeling Fabulous',
+                zone: "You're sparkling right now!",
+                color: 'ignited',
+                experience: "You can access your full range right now. You can think clearly, feel your emotions without drowning in them, and make genuine choices. This is your baseline optimal state - not 'calm' necessarily, but regulated and ready to shine!",
+                neurology: "Your Default Mode Network (DMN - internal processing, reflection) and Task Positive Network (TPN - external focus, action) are both accessible. You can switch between them fluidly. This flexibility IS emotional regulation.",
+                validation: "This state is the goal, not the norm. Staying here requires active maintenance. Protect this window - it's precious, Kathleen! 💜",
+                categories: [
+                    {
+                        id: 'maintain',
+                        name: '🛡️ Maintain',
+                        tools: [
+                            { id: 'protect-sleep', name: 'Protect Your Sleep', icon: '😴', steps: ["Set a 'screens down' alarm for 1 hour before bed", "Create a sensory-friendly transition: dim lights, reduce noise", "Note what disrupts your sleep - these are early warning signs", "Sleep debt is a fast track to losing your sparkle"], tip: "This isn't about discipline - it's about protecting your nervous system." },
+                            { id: 'energy-audit', name: 'Quick Energy Audit', icon: '⚡', steps: ["Check your energy tank: How full do you feel? (1-10)", "Look at tomorrow: Any big energy drains coming?", "Identify one thing you could move, delegate, or decline", "Schedule a recharge activity before any major drain"], tip: "While you're feeling fabulous, you can actually plan effectively. Use this superpower!" }
+                        ]
+                    }
+                ]
+            },
+            'hyper': {
+                icon: '🌀',
+                name: 'Totally Overwhelmed',
+                zone: 'Everything feels like too much right now',
+                color: 'hyper',
+                experience: "Your mind is racing. Thoughts spiral into worst-case scenarios. You might feel anxious, angry, panicked, or like you need to DO something RIGHT NOW. Everything feels urgent.",
+                neurology: "You're stuck in rumination spirals - your Default Mode Network is in overdrive. You can't access calm external focus because your nervous system is in fight-or-flight.",
+                validation: "This is NOT a character flaw, Kathleen. Your nervous system is doing what it's designed to do. This is biology, not weakness. You've got this. 💜",
+                categories: [
+                    {
+                        id: 'downregulate',
+                        name: '🌊 Calm Down',
+                        tools: [
+                            { id: 'physiological-sigh', name: 'Physiological Sigh', icon: '🫁', steps: ["Take a deep breath IN through your nose", "At the top, take a second small sip of air", "Exhale slowly through your mouth - longer than the inhale", "Repeat 2-3 times. This activates your calming system."], tip: "This is the fastest evidence-based way to calm your nervous system. It works in 1-2 minutes." },
+                            { id: 'cold-water', name: 'Cold Water Reset', icon: '💧', steps: ["Run cold water over your wrists for 30 seconds", "Or: splash cold water on your face", "Or: hold ice cubes in your hands", "Focus on the physical sensation - anchor to NOW"], tip: "Cold triggers your dive reflex, automatically slowing heart rate. It's a nervous system hack!" }
+                        ]
+                    }
+                ]
+            },
+            'hypo': {
+                icon: '🧊',
+                name: 'Completely Flat',
+                zone: 'Feeling numb and disconnected',
+                color: 'hypo',
+                experience: "You feel numb, empty, disconnected. It's hard to move or care about anything. You might feel frozen, exhausted, or like watching life from behind glass.",
+                neurology: "Both your internal and external focus networks have gone offline as a protective shutdown. This is 'last resort' protection mode.",
+                validation: "This is NOT laziness, Kathleen. Your nervous system has hit its limit and is forcing a shutdown to protect you. Work WITH it, gorgeous. 💜",
+                categories: [
+                    {
+                        id: 'reactivate',
+                        name: '🔋 Gentle Reactivation',
+                        tools: [
+                            { id: 'tiny-movement', name: 'Tiny Movement', icon: '🦶', steps: ["Wiggle your toes. That's it.", "If you can, gently squeeze and release your hands", "Roll your shoulders once - just once is enough", "These micro-movements signal 'safe' to your nervous system"], tip: "Big movements feel impossible right now. That's okay. Tiny ones can restart the system." },
+                            { id: 'warmth', name: 'Seek Warmth', icon: '☕', steps: ["Get something warm: tea, hot water bottle, warm blanket", "Hold it against your chest or stomach", "Focus on the sensation of warmth spreading", "Warmth signals safety to your nervous system"], tip: "Your body has gone cold as part of shutdown. Warmth gently invites it back online." }
+                        ]
+                    }
+                ]
+            },
+            'dysreg-upper': {
+                icon: '😤',
+                name: 'Getting Wound Up',
+                zone: 'Stress is building, irritation rising',
+                color: 'dysreg-upper',
+                experience: "You can feel the tension building. Maybe you're snapping at people, feeling irritable, or noticing small things bothering you more than usual.",
+                neurology: "Your nervous system is ramping up toward fight-or-flight. Cortisol and adrenaline are increasing. Your thinking brain is starting to go offline.",
+                validation: "This is a crucial window, Kathleen. You've noticed you're heading toward overwhelm BEFORE you get there. That awareness is powerful. This is the BEST time to intervene. 💜",
+                categories: [
+                    {
+                        id: 'release',
+                        name: '💨 Release Tension',
+                        tools: [
+                            { id: 'shake-it', name: 'Shake It Out', icon: '🫨', steps: ["Stand up if you can (sitting works too)", "Shake your hands vigorously for 30 seconds", "Add your arms, shoulders - let your whole body shake", "This releases built-up stress hormones through movement"], tip: "Animals literally shake after stressful events. Your body knows how to do this too!" },
+                            { id: 'movement-blast', name: 'Movement Blast', icon: '🏃', steps: ["Do something physical for 2-5 minutes", "Walk fast, do star jumps, dance!", "The goal is to USE the energy your body is generating", "Stop when you feel slightly out of breath"], tip: "Your body is generating energy for fight-or-flight. Using it physically helps it discharge safely." }
+                        ]
+                    }
+                ]
+            },
+            'dysreg-lower': {
+                icon: '😔',
+                name: 'Running on Empty',
+                zone: 'Energy draining, motivation fading',
+                color: 'dysreg-lower',
+                experience: "You're tired but it's more than tired. Everything feels like too much effort. You might be withdrawing, cancelling plans, or just going through the motions.",
+                neurology: "Your system is moving toward shutdown as a protection mechanism. Energy is being conserved because your nervous system perceives ongoing overwhelm.",
+                validation: "This is your body sending a clear signal: something needs to change. Listening to it now - before full shutdown - is wisdom, not weakness, gorgeous. 💜",
+                categories: [
+                    {
+                        id: 'replenish',
+                        name: '🔋 Replenish',
+                        tools: [
+                            { id: 'basic-needs', name: 'Basic Needs Check', icon: '📋', steps: ["When did you last eat? (If 3+ hours, eat something now)", "When did you last drink water? (Drink some now)", "When did you last move? (Stand up and stretch)", "These basics often get forgotten when depleted"], tip: "Sometimes 'emotional' exhaustion is actually just physical basics being neglected." },
+                            { id: 'gentle-pleasure', name: 'Gentle Pleasure', icon: '🌸', steps: ["Think of something that brings you a tiny bit of joy", "A cup of tea, a song, a cosy corner", "Give yourself permission to do just that ONE thing", "Let yourself actually receive it - don't rush"], tip: "Gentle pleasure is medicine for a tired nervous system." }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        const NEUROTRANSMITTERS = {
+            dopamine: { name: 'Dopamine', icon: '💗', lowSigns: ['Lack of motivation', 'Difficulty feeling pleasure', 'Procrastination', 'Low energy'], boosts: ['Complete a small task', 'Listen to music you love', 'Exercise - even a short walk', 'Celebrate small wins'] },
+            oxytocin: { name: 'Oxytocin', icon: '🧡', lowSigns: ['Feeling disconnected', 'Loneliness', 'Difficulty trusting', 'Craving physical touch'], boosts: ['Hug someone for 20 seconds', 'Have a meaningful conversation', 'Give a genuine compliment', 'Do something kind'] },
+            serotonin: { name: 'Serotonin', icon: '💙', lowSigns: ['Low mood that lingers', 'Difficulty sleeping', 'Anxiety without clear cause', 'Feeling worthless'], boosts: ['Get sunlight (even 10 mins)', 'Exercise outdoors', 'Practice gratitude', 'Recall a happy memory'] },
+            endorphins: { name: 'Endorphins', icon: '💚', lowSigns: ['Feeling physically tense', 'Low pain tolerance', 'Anxiety and restlessness', 'Seeking numbing behaviours'], boosts: ['Exercise - especially intense', 'Laugh! Watch something funny', 'Eat dark chocolate', 'Get a massage or stretch'] }
+        };
+
+        // ============================================
+        // APP STATE
+        // ============================================
+
+        let selectedState = null;
+        let history = JSON.parse(localStorage.getItem('kathleen_history') || '[]');
+        let journalEntries = JSON.parse(localStorage.getItem('kathleen_journal') || '[]');
+
+        // ============================================
+        // FUNCTIONS
+        // ============================================
+
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            const greetingEl = document.getElementById('greeting');
+            let greeting = 'Hey Kathleen';
+            if (hour < 12) greeting = 'Good morning, Kathleen';
+            else if (hour < 17) greeting = 'Good afternoon, Kathleen';
+            else if (hour < 21) greeting = 'Good evening, Kathleen';
+            else greeting = 'Hey night owl Kathleen';
+            greetingEl.textContent = greeting + '! ⚡';
+        }
+
+        function selectState(state) {
+            selectedState = state;
+            document.querySelectorAll('.state-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`.state-option.${state}`).classList.add('selected');
+            document.getElementById('continueBtn').disabled = false;
+        }
+
+        function showStateDetail() {
+            if (!selectedState) return;
+            const state = STATES[selectedState];
+            document.getElementById('stateSelector').style.display = 'none';
+
+            const detailEl = document.getElementById('stateDetail');
+            detailEl.innerHTML = `
+                <button class="back-btn" onclick="goBack()">← Back</button>
+                <div class="state-header ${state.color}">
+                    <div class="icon">${state.icon}</div>
+                    <h2>${state.name}</h2>
+                    <div class="zone">${state.zone}</div>
+                </div>
+                <div class="explanation-card"><h4>💭 What you might be experiencing</h4><p>${state.experience}</p></div>
+                <div class="explanation-card neurology"><h4>🧠 What's happening in your brain</h4><p>${state.neurology}</p></div>
+                <div class="explanation-card validation"><h4>💜 Remember this</h4><p>${state.validation}</p></div>
+                <div class="neuro-section" style="border-top: none; margin-top: 0; padding-top: 0;">
+                    <h3>✨ Sparkly Tools to Help</h3>
+                    <div class="intervention-categories">${state.categories.map((cat, i) => `<button class="category-tab ${i === 0 ? 'active' : ''}" onclick="showCategory('${cat.id}')">${cat.name}</button>`).join('')}</div>
+                    <div id="toolsList">${renderTools(state.categories[0].tools)}</div>
+                </div>
+            `;
+            detailEl.classList.add('active', 'fade-in');
+            addToHistory(selectedState);
+        }
+
+        function renderTools(tools) {
+            return `<div class="intervention-list">${tools.map(tool => `
+                <div class="intervention-item" onclick="this.classList.toggle('expanded')">
+                    <div class="intervention-header"><h4>${tool.icon} ${tool.name}</h4></div>
+                    <div class="intervention-content">
+                        <ol class="intervention-steps">${tool.steps.map(step => `<li>${step}</li>`).join('')}</ol>
+                        <div class="intervention-tip">💡 ${tool.tip}</div>
+                    </div>
+                </div>
+            `).join('')}</div>`;
+        }
+
+        function showCategory(catId) {
+            const state = STATES[selectedState];
+            const category = state.categories.find(c => c.id === catId);
+            document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('toolsList').innerHTML = renderTools(category.tools);
+        }
+
+        function goBack() {
+            document.getElementById('stateDetail').classList.remove('active');
+            document.getElementById('stateDetail').innerHTML = '';
+            document.getElementById('stateSelector').style.display = 'block';
+            selectedState = null;
+            document.querySelectorAll('.state-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('continueBtn').disabled = true;
+        }
+
+        function selectNeuro(neuro) {
+            document.querySelectorAll('.neuro-card').forEach(card => card.classList.remove('selected'));
+            document.querySelector(`.neuro-card.${neuro}`).classList.add('selected');
+            const data = NEUROTRANSMITTERS[neuro];
+            document.getElementById('neuroDetail').innerHTML = `
+                <h4>${data.icon} ${data.name}</h4>
+                <p><strong>Signs it might be low:</strong></p>
+                <ul>${data.lowSigns.map(s => `<li>${s}</li>`).join('')}</ul>
+                <p style="margin-top: 15px;"><strong>Natural ways to boost it:</strong></p>
+                <ul>${data.boosts.map(b => `<li>${b}</li>`).join('')}</ul>
+            `;
+            document.getElementById('neuroDetail').classList.add('active');
+        }
+
+        function addToHistory(state) {
+            history.unshift({ state: state, timestamp: new Date().toISOString() });
+            if (history.length > 10) history = history.slice(0, 10);
+            localStorage.setItem('kathleen_history', JSON.stringify(history));
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            if (history.length === 0) return;
+            document.getElementById('historySection').style.display = 'block';
+            document.getElementById('historyList').innerHTML = history.slice(0, 5).map(entry => {
+                const state = STATES[entry.state];
+                const date = new Date(entry.timestamp);
+                const timeStr = date.toLocaleString('en-GB', { weekday: 'short', hour: '2-digit', minute: '2-digit' });
+                return `<div class="history-item"><span class="state-badge ${entry.state}">${state.icon} ${state.name}</span><span style="color: rgba(255,255,255,0.6);">${timeStr}</span></div>`;
+            }).join('');
+        }
+
+        // ============================================
+        // DECISION MATRIX
+        // ============================================
+
+        let matrixData = JSON.parse(localStorage.getItem('kathleen_matrix') || '{"doNow":[],"schedule":[],"delegate":[],"drop":[]}');
+
+        function loadMatrix() {
+            ['doNow', 'schedule', 'delegate', 'drop'].forEach(quadrantId => {
+                const container = document.getElementById(quadrantId);
+                container.innerHTML = '';
+                (matrixData[quadrantId] || []).forEach((item, index) => {
+                    container.innerHTML += createMatrixItemHTML(quadrantId, item, index);
+                });
+            });
+        }
+
+        function createMatrixItemHTML(quadrantId, text, index) {
+            return `<div class="matrix-item">
+                <span>${text}</span>
+                <button class="matrix-item-delete" onclick="deleteMatrixItem('${quadrantId}', ${index}, event)">×</button>
+            </div>`;
+        }
+
+        function addToQuadrant(quadrantId, event) {
+            // Prevent default to avoid keyboard issues on iOS
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            const input = document.getElementById('matrixInput');
+            const text = input.value.trim();
+            if (!text) {
+                input.placeholder = "Type something first, gorgeous! ✨";
+                setTimeout(() => {
+                    input.placeholder = "What's on your mind? Type and tap where it goes...";
+                }, 2000);
+                return;
+            }
+
+            // Add to data
+            if (!matrixData[quadrantId]) matrixData[quadrantId] = [];
+            matrixData[quadrantId].push(text);
+
+            // Save to localStorage
+            saveMatrix();
+
+            // Clear input
+            input.value = '';
+
+            // Re-render
+            loadMatrix();
+
+            // Show quick feedback
+            const statusEl = document.getElementById('matrixStatus');
+            statusEl.textContent = '✨ Added!';
+            setTimeout(() => {
+                statusEl.textContent = '✓ Auto-saved';
+            }, 1000);
+        }
+
+        function deleteMatrixItem(quadrantId, index, event) {
+            event.stopPropagation(); // Prevent triggering addToQuadrant
+            matrixData[quadrantId].splice(index, 1);
+            saveMatrix();
+            loadMatrix();
+        }
+
+        function saveMatrix() {
+            localStorage.setItem('kathleen_matrix', JSON.stringify(matrixData));
+            const statusEl = document.getElementById('matrixStatus');
+            statusEl.textContent = '💾 Saving...';
+            setTimeout(() => {
+                statusEl.textContent = '✓ Auto-saved';
+            }, 500);
+        }
+
+        function clearMatrix() {
+            if (confirm('Clear all quadrants? This cannot be undone!')) {
+                matrixData = { doNow: [], schedule: [], delegate: [], drop: [] };
+                saveMatrix();
+                loadMatrix();
+                document.getElementById('matrixStatus').textContent = '✓ Cleared';
+            }
+        }
+
+        // Journal
+        const journalEl = document.getElementById('journalEntry');
+        journalEl.value = localStorage.getItem('kathleen_journal_draft') || '';
+        journalEl.addEventListener('input', () => localStorage.setItem('kathleen_journal_draft', journalEl.value));
+        function insertPrompt(prompt) { journalEl.value = prompt + ' '; journalEl.focus(); }
+        function saveJournalEntry() {
+            const text = journalEl.value.trim();
+            if (!text) return;
+            journalEntries.unshift({ text: text, timestamp: new Date().toISOString() });
+            localStorage.setItem('kathleen_journal', JSON.stringify(journalEntries));
+            journalEl.value = '';
+            localStorage.setItem('kathleen_journal_draft', '');
+            document.getElementById('journalStatus').textContent = '✓ Entry saved!';
+            updateJournalDisplay();
+        }
+        function updateJournalDisplay() {
+            if (journalEntries.length === 0) return;
+            document.getElementById('pastEntries').style.display = 'block';
+            document.getElementById('entriesList').innerHTML = journalEntries.map((entry, i) => {
+                const date = new Date(entry.timestamp);
+                const dateStr = date.toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+                return `<div class="entry-card"><button class="entry-delete" onclick="deleteEntry(${i})">×</button><div class="entry-date">${dateStr}</div><div class="entry-text">${entry.text}</div></div>`;
+            }).join('');
+        }
+        function togglePastEntries() {
+            const list = document.getElementById('entriesList');
+            list.classList.toggle('open');
+            document.getElementById('entriesIcon').textContent = list.classList.contains('open') ? '▲' : '▼';
+        }
+        function deleteEntry(index) {
+            if (confirm('Delete this entry?')) {
+                journalEntries.splice(index, 1);
+                localStorage.setItem('kathleen_journal', JSON.stringify(journalEntries));
+                updateJournalDisplay();
+            }
+        }
+
+        // Initialize
+        updateGreeting();
+        updateHistoryDisplay();
+        updateJournalDisplay();
+        loadMatrix();
+    </script>
+</body>
+</html>
